@@ -126,12 +126,12 @@
         bounds_group.addLayer(layer__1);
         map.addLayer(layer__1);
 		
-		var overlay_OSMStandard_0 = L.tileLayer('tilemap/Mapnik/{z}/{x}/{y}.png', {
-			maxZoom: 10,
-			tms: false
-		}).addTo(map);
-        overlay_OSMStandard_0.addTo(map);
-        map.addLayer(overlay_OSMStandard_0);
+		//var overlay_OSMStandard_0 = L.tileLayer('tilemap/Mapnik/{z}/{x}/{y}.png', {
+		//	maxZoom: 10,
+		//	tms: false
+		//}).addTo(map);
+        //overlay_OSMStandard_0.addTo(map);
+        //map.addLayer(overlay_OSMStandard_0);
 		
         function pop__2(feature, layer) {
             layer.on({
@@ -142,6 +142,7 @@
                 },
                 mouseover: highlightFeature,
             });
+			layer.setRadius((Math.log10(feature.properties['area']) * Math.log10(feature.properties['area']))/1.5);
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['_uid_'] !== null ? Autolinker.link(String(feature.properties['_uid_'])) : '') + '</td>\
@@ -174,7 +175,7 @@
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
-
+		
         function style__2_0() {
             return {
                 pane: 'pane__2',
@@ -207,6 +208,7 @@
         });
         bounds_group.addLayer(layer__2);
         map.addLayer(layer__2);
+
         function pop__3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -216,6 +218,7 @@
                 },
                 mouseover: highlightFeature,
             });
+			layer.setRadius((Math.log10(feature.properties['area']) * Math.log10(feature.properties['area']))/1.5);
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['_uid_'] !== null ? Autolinker.link(String(feature.properties['_uid_'])) : '') + '</td>\
@@ -294,7 +297,7 @@
                 map.removeLayer(layer__1);
             }
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="img/_3.png" /> Оренда складів': layer__3,'<img src="img/_2.png" /> Продаж складів': layer__2,'<img src="img/_1.png" /> Регіони України': layer__1,"Склади по розміру": overlay_OSMStandard_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="img/_3.png" /> Оренда складів': layer__3,'<img src="img/_2.png" /> Продаж складів': layer__2,'<img src="img/_1.png" /> Регіони України': layer__1,},{collapsed:false}).addTo(map);
         setBounds();
         </script>
     </body>
